@@ -703,7 +703,7 @@ countDistinct :: Num a => SqlExpr (Value typ) -> SqlExpr (Value a)
 countDistinct = countHelper "(DISTINCT " ")"
 
 not_ :: SqlExpr (Value Bool) -> SqlExpr (Value Bool)
-not_ v = ERaw noMeta $ \p info -> first ("NOT " <>) $ x p info
+not_ v = ERaw noMeta $ \p info -> first (\a -> "NOT (" <> a <> ")") $ x p info
   where
     x p info =
         case v of
